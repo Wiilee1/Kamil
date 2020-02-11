@@ -12,8 +12,9 @@ using System.IO;
 
 namespace probanr2
 {
-    public partial class Form1 : Form
+    public partial class Form1 : System.Windows.Forms.Form
     {
+        List<Customer> customers = new List<Customer>();
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +25,6 @@ namespace probanr2
         Excel.Worksheet xlWorkSheet;
 
         string sFileName;
-        int iRow, iCol = 2;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -32,9 +32,7 @@ namespace probanr2
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-
-            
+        {            
             openFileDialog1.Title = "Excel File to Edit";
             openFileDialog1.FileName = "";
             openFileDialog1.Filter = "Excel File|*.xlsx;*.xls";
@@ -55,26 +53,47 @@ namespace probanr2
 
         }
 
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
         private void readExcel(string sFile)
         {
             xlApp = new Excel.Application();
             xlWorkBook = xlApp.Workbooks.Open(sFile);           // WORKBOOK TO OPEN THE EXCEL FILE.
-            xlWorkSheet = xlWorkBook.Worksheets["Sheet1"];      // NAME OF THE SHEET.
+            xlWorkSheet = xlWorkBook.Worksheets[2];      // NAME OF THE SHEET.
 
-            for (iRow = 1; iRow <= xlWorkSheet.Rows.Count; iRow++)  // START FROM THE SECOND ROW.
-            {
-                if (xlWorkSheet.Cells[iRow, 1].value == null)
-                {
-                    break;      // BREAK LOOP.
-                }
-                else
-                {               // POPULATE COMBO BOX.
-                    cmbEmp.Items.Add(xlWorkSheet.Cells[iRow, 1].value);
-                }
-            }
+            string name, address, email, county;
+            double phone, reference;
+
+            name = xlWorkSheet.Cells[11, 2].value;
+            address = xlWorkSheet.Cells[11, 4].value;
+            email = xlWorkSheet.Cells[11, 8].value;
+            county = xlWorkSheet.Cells[39, 7].value;
+            phone = xlWorkSheet.Cells[11, 6].value;
+            string phonestring = System.Convert.ToString(phone);
+            reference = xlWorkSheet.Cells[7, 3].value;
+            string refstring = System.Convert.ToString(reference);
+
+            ListViewItem item = new ListViewItem(xlWorkSheet.Cells[11, 2].value);
+            item.SubItems.Add(address);
+            item.SubItems.Add(email);
+            item.SubItems.Add(county);
+            item.SubItems.Add(phonestring);
+            item.SubItems.Add(refstring);
+            listView1.Items.Add(item);
+            customers.Add(new Customer(name, address, email, county, phone, reference));
 
             xlWorkBook.Close();
             xlApp.Quit();
         }
+
+
     }
 }
