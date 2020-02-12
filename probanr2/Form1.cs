@@ -67,7 +67,7 @@ namespace probanr2
         {
             xlApp = new Excel.Application();
             xlWorkBook = xlApp.Workbooks.Open(sFile);           // WORKBOOK TO OPEN THE EXCEL FILE.
-            xlWorkSheet = xlWorkBook.Worksheets[2];      // NAME OF THE SHEET.
+            xlWorkSheet = xlWorkBook.Worksheets[2];      // NAME OR NUMBER OF THE SHEET.
 
             string name, address, email, county;
             double phone, reference;
@@ -94,6 +94,116 @@ namespace probanr2
             xlApp.Quit();
         }
 
+        private void loadCustomers_button_Click(object sender, EventArgs e)  // LOAD FILE BUTTON
+        {
+            string str;
+            Stream myStream = null;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
 
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    myStream = openFileDialog1.OpenFile();
+                    StreamReader sr = new StreamReader(myStream);
+                    string[] split;
+
+                    while ((str = sr.ReadLine()) != null)
+                    {
+
+                        split = str.Split(new char[] { ',' });
+                        string name = split[0];
+                        string address = split[1];
+                        string email = split[2];
+                        string county = split[3];
+                        double phone = System.Convert.ToInt32(split[4]);
+                        double reference = System.Convert.ToInt32(split[5]);
+
+
+                        customers.Add(new Customer(name, address, email, county, phone, reference));
+                    }
+
+
+                    sr.Close();
+                    myStream.Close();
+
+                    listView1.Items.Clear();
+
+                    foreach (Customer c in customers)
+                    {
+                        string name = c.getName();
+                        string address = c.getAddress();
+                        string email = c.getEmail();
+                        string county = c.getCounty();
+                        double phone = c.getPhone();
+                        double reference = c.getReference();
+                        string phonestring = System.Convert.ToString(phone);
+                        string referencestring = System.Convert.ToString(reference);
+
+                        ListViewItem item = new ListViewItem(name);
+                        item.SubItems.Add(address);
+                        item.SubItems.Add(email);
+                        item.SubItems.Add(county);
+                        item.SubItems.Add(phonestring);
+                        item.SubItems.Add(referencestring);
+                        listView1.Items.Add(item);
+                    }
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private void saveCustomer_button_Click(object sender, EventArgs e) // SAVE FILE BUTTON
+        {
+
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = "c:\\";
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            string[] output = new string[customers.Count];
+            int j = 0;
+            foreach (Customer c in customers)
+            {
+                output[j] = c.getName() + "," + c.getEmail() + "," + c.getCounty() + "," +
+                    c.getPhone() + "," + c.getReference();        
+                j++;
+            }
+
+
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    myStream = saveFileDialog1.OpenFile();
+                    StreamWriter sw = new StreamWriter(myStream);
+                    for (int i = 0; i < customers.Count; i++)
+                    {
+                        sw.WriteLine(output[i]);
+                    }
+
+                    sw.Close();
+                    myStream.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
     }
 }

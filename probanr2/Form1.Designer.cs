@@ -40,13 +40,16 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.cmbEmp = new System.Windows.Forms.ComboBox();
+            this.loadCustomers_button = new System.Windows.Forms.Button();
+            this.saveCustomer_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdSelect
             // 
-            this.cmdSelect.Location = new System.Drawing.Point(1032, 28);
+            this.cmdSelect.Location = new System.Drawing.Point(1548, 43);
+            this.cmdSelect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmdSelect.Name = "cmdSelect";
-            this.cmdSelect.Size = new System.Drawing.Size(272, 23);
+            this.cmdSelect.Size = new System.Drawing.Size(408, 35);
             this.cmdSelect.TabIndex = 0;
             this.cmdSelect.Text = "Open Excel File";
             this.cmdSelect.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             this.Phone,
             this.Reference});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(72, 28);
+            this.listView1.Location = new System.Drawing.Point(108, 43);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(945, 617);
+            this.listView1.Size = new System.Drawing.Size(1416, 947);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -107,9 +111,10 @@
             // exitButton
             // 
             this.exitButton.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.exitButton.Location = new System.Drawing.Point(1116, 659);
+            this.exitButton.Location = new System.Drawing.Point(1674, 1014);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(144, 56);
+            this.exitButton.Size = new System.Drawing.Size(216, 86);
             this.exitButton.TabIndex = 2;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
@@ -122,21 +127,45 @@
             // cmbEmp
             // 
             this.cmbEmp.FormattingEnabled = true;
-            this.cmbEmp.Location = new System.Drawing.Point(1046, 152);
+            this.cmbEmp.Location = new System.Drawing.Point(1569, 234);
+            this.cmbEmp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbEmp.Name = "cmbEmp";
-            this.cmbEmp.Size = new System.Drawing.Size(245, 21);
+            this.cmbEmp.Size = new System.Drawing.Size(366, 28);
             this.cmbEmp.TabIndex = 3;
+            // 
+            // loadCustomers_button
+            // 
+            this.loadCustomers_button.Location = new System.Drawing.Point(1548, 425);
+            this.loadCustomers_button.Name = "loadCustomers_button";
+            this.loadCustomers_button.Size = new System.Drawing.Size(200, 106);
+            this.loadCustomers_button.TabIndex = 4;
+            this.loadCustomers_button.Text = "Load File";
+            this.loadCustomers_button.UseVisualStyleBackColor = true;
+            this.loadCustomers_button.Click += new System.EventHandler(this.loadCustomers_button_Click);
+            // 
+            // saveCustomer_button
+            // 
+            this.saveCustomer_button.Location = new System.Drawing.Point(1548, 652);
+            this.saveCustomer_button.Name = "saveCustomer_button";
+            this.saveCustomer_button.Size = new System.Drawing.Size(200, 95);
+            this.saveCustomer_button.TabIndex = 5;
+            this.saveCustomer_button.Text = "Save File";
+            this.saveCustomer_button.UseVisualStyleBackColor = true;
+            this.saveCustomer_button.Click += new System.EventHandler(this.saveCustomer_button_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1325, 748);
+            this.ClientSize = new System.Drawing.Size(1988, 1151);
+            this.Controls.Add(this.saveCustomer_button);
+            this.Controls.Add(this.loadCustomers_button);
             this.Controls.Add(this.cmbEmp);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.cmdSelect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -158,6 +187,8 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ComboBox cmbEmp;
+        private System.Windows.Forms.Button loadCustomers_button;
+        private System.Windows.Forms.Button saveCustomer_button;
     }
 }
 
