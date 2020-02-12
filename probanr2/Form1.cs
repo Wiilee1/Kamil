@@ -120,8 +120,8 @@ namespace probanr2
                         string address = split[1];
                         string email = split[2];
                         string county = split[3];
-                        double phone = System.Convert.ToInt32(split[4]);
-                        double reference = System.Convert.ToInt32(split[5]);
+                        double phone = System.Convert.ToDouble(split[4]);
+                        double reference = System.Convert.ToDouble(split[5]);
 
 
                         customers.Add(new Customer(name, address, email, county, phone, reference));
@@ -177,7 +177,7 @@ namespace probanr2
             int j = 0;
             foreach (Customer c in customers)
             {
-                output[j] = c.getName() + "," + c.getEmail() + "," + c.getCounty() + "," +
+                output[j] = c.getName() + "," + c.getAddress() + "," + c.getEmail() + "," + c.getCounty() + "," +
                     c.getPhone() + "," + c.getReference();        
                 j++;
             }

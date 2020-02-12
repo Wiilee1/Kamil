@@ -11,7 +11,8 @@ namespace probanr2
         protected string name, address, email, county;
         protected double phone, reference;
 
-        public Customer(string name, string address, string email, string county, double phone, double reference)
+        public Customer(string name, string address = "none", string email = "none", string county = "none", 
+            double phone = 1, double reference = 1)
         {
             this.name = name;
             this.address = address;
